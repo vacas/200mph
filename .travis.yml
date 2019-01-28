@@ -1,15 +1,10 @@
 sudo: required
-language: node_js
-node_js:
-- 10.15.0
 services:
 - docker
 before_install:
   - wget -q0- https://toolbelt.heroku.com/install.sh | sh
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" password-stdin registry.heroku.com
-  install:
-    - npm install
   script:
     - docker build -t mfjv88/200mph .
     - docker tag mfjv88/200mph registry.heroku.com/$HEROKU_APP_NAME/web
