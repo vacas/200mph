@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/vacas/200mph.svg?branch=master)](https://travis-ci.org/vacas/200mph)
 # 200 MPH Game
 ### Based on the Bad Bunny song
 
