@@ -9,6 +9,7 @@ jobs:
   - stage: build and deploy
   install:
   - npm install
+  - npm start
 deploy:
   provide: heroku
   api_key:
