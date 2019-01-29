@@ -2,14 +2,13 @@ sudo: required
 language: node_js
 node_js:
 - node
-before_install:
-- wget -q0- https://toolbelt.heroku.com/install.sh | sh
+cache: npm
 jobs:
   includes:
   - stage: build and deploy
-  install:
+  before_script:
   - npm install
-  - npm start
+  script: echo "npm test temporarily disabled"
 deploy:
   provide: heroku
   api_key:
