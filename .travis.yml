@@ -1,19 +1,16 @@
 sudo: required
-services:
-  - docker
+language: node_js
+node_js:
+- node
 before_install:
-  - wget -q0- https://toolbelt.heroku.com/install.sh | sh
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" password-stdin registry.heroku.com
-  script:
-    - docker build -t mfjv88/200mph .
-    - docker tag mfjv88/200mph registry.heroku.com/$HEROKU_APP_NAME/web
-
-  deploy:
-    provider: script
-    script:
-      docker push mfjv88/200mph;
-      docker push registry.heroku.com/$HEROKU_APP_NAME/web;
-      heroku container:release web --app $HEROKU_APP_NAME
-    on:
-      branch: master
+- wget -q0- https://toolbelt.heroku.com/install.sh | sh
+jobs:
+  includes:
+  - stage: build and deploy
+  install:
+  - npm install
+deploy:
+  provide: heroku
+  api_key:
+    secure: jFzVDM3+9vL0B45UoUzOSffKbbFezyJpQuUJlnRp7zXi3S/+ZbDlFtAhWZg0vP+iathLBd6lYirT+rNmg/pMOr2mbSvt5YCeqG1s4etkh18Q5y/8hq6CHH1kJTWil39vm0Ey5xzgp8Emj9DGbFk8xEL4GvNWWOd9SoNTx+ElL2/l2LBjAoOXkRdlhGlRdLE8sNIVFiFagk0JlOZ1X4Q9qeeup1nOFFdHlN1N/ekIpSLSKhOnm7lXH1NczW5c8emFBLbGqCY3vj6n+YnlWOkUy5WdkSZTUu+dfNh5oS+TvF2fiwGXIX0Ix91hP9xYJPZy2+GVHJSw/3Ud+RsH7KAcJdAlZ+tXyd235quDJwmlguqzUBcrbcSUdVkayzPMKPxmxGnQ2PX41pawzb9v0gv8f+VgJ6ZelV8NjbpS+RGAPadGGdhV03flm6ryT3I/melU5THKokcjAqxkjcWMtRJRR86vJZm7Jn8ekaGzuAwMQpn3Fn4dT8SMg4m2dUmCWtaA+hVolEmgjxdNd9Mom0opss0ifqdSj8FXHor1sSiUqfuIXja7BaBfdiPMLJstkutbpNoRCfIeysRKhfHHxifzmzIdeR5FXPNr7a270mI02CnJ/ensaTpHQwedzjqH+CUuBiTYL6aO56FhzHdCSeyYbDVaT97HmSa3afbobak3psw=
+  app: game-200mph
