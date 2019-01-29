@@ -5,11 +5,13 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack",
-    "start": "npm run build && webpack-dev-server"
+    "dev": "npm run build && webpack-dev-server",
+    "start": "npm run build && node server.js"
   },
   "author": "Vacas",
   "license": "UNLICENSED",
   "dependencies": {
+    "express": "^4.16.4",
     "phaser": "^3.15.1",
     "phaser-ce": "^2.11.1",
     "webfontloader": "^1.6.28"
