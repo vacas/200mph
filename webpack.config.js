@@ -72,7 +72,7 @@ module.exports = {
     port: process.env.PORT || 8080,
     contentBase: './build',
     watchContentBase: true,
-    hot: true,
+    // hot: true,
     historyApiFallback: true,
   },
   // resolve: {
