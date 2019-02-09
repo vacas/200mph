@@ -6,7 +6,7 @@ import empire from './assets/empire.png';
 import blue from './assets/blueline.png';
 import darkblue from './assets/darkblueline.png';
 
-let cursor, right, player, lane1;
+let cursor, right, player, lanes = [], i = 0;
 
 function preload() {
     this.load.image('vader', empire);
@@ -15,14 +15,14 @@ function preload() {
 }
 
 function create() {
-    var lanes = this.physics.add.staticGroup();
+    var lanesGroup = this.physics.add.staticGroup();
 
-    // lanes.create(400, 568, 'darkblue').setScale(2).refreshBody();
-    lane1 = lanes.create(500, 580, 'blue');
-    var lane2 = lanes.create(500, 600, 'blue');
-    // lanes.create(50, 250, 'darkblue');
+    lanes[0] = lanesGroup.create(500, 560, 'blue');
+    lanes[1] = lanesGroup.create(500, 580, 'blue');
+    lanes[2] = lanesGroup.create(500, 600, 'blue');
+    lanes[3] = lanesGroup.create(500, 620, 'blue');
 
-    this.physics.world.gravity.y = 250;
+    this.physics.world.gravity.y = 200;
     player = this.physics.add.sprite(100, 350, 'vader');
     cursor = this.input.keyboard.createCursorKeys();
 
@@ -37,23 +37,34 @@ function update() {
 }
 
 function move() {
+  if(cursor.up._justUp && player.body.wasTouching.none && player.body.touching.down) {
+    player.setVelocityX(+1);
+  }
+
+  if(cursor.down._justUp && player.body.wasTouching.none && player.body.touching.down) {
+    player.setVelocityX(-1);
+  }
+
+
   if (cursor.right.isDown) {
     player.x += 2;
   } else if (cursor.left.isDown) {
     player.x -= 2;
-  } else if (cursor.down.isDown && player.body.touching.down) {
-    player.y += 2;
-    lane1.body.checkCollision.up = false;
-    player.setVelocityX(+50);
-    player.setVelocityY(-100);
-  } else if (cursor.up.isDown && player.body.touching.down) {
-    lane1.body.checkCollision.up = true;
-    player.setVelocityX(-50);
-    player.setVelocityY(-100);
-  }
-
-  if (!player.body.touching.down) {
-    player.setVelocityX(0);
+  } else if (cursor.down.isDown && player.body.touching.down && i < 4) {
+    player.setVelocityX(+20);
+    player.setVelocityY(-120);
+    if (i >= 0 && i < 3) {
+      lanes[i].body.checkCollision.up = false;
+      i++;
+    }
+  } else if (cursor.up.isDown && player.body.touching.down && i >= 0) {
+    player.setVelocityX(-20);
+    player.setVelocityY(-120);
+    lanes[i - 1].body.checkCollision.up = true;
+    if (i > 0 && i < 4) {
+      lanes[i].body.checkCollision.up = true;
+      i--;
+    }
   }
 }
 
