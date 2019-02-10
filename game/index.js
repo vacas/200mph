@@ -17,10 +17,10 @@ function preload() {
 function create() {
     var lanesGroup = this.physics.add.staticGroup();
 
-    lanes[0] = lanesGroup.create(500, 560, 'blue');
-    lanes[1] = lanesGroup.create(500, 580, 'blue');
-    lanes[2] = lanesGroup.create(500, 600, 'blue');
-    lanes[3] = lanesGroup.create(500, 620, 'blue');
+    lanes[0] = lanesGroup.create(500, 564, 'blue');
+    lanes[1] = lanesGroup.create(500, 576, 'darkblue');
+    lanes[2] = lanesGroup.create(500, 588, 'blue');
+    lanes[3] = lanesGroup.create(500, 600, 'darkblue');
 
     this.physics.world.gravity.y = 200;
     player = this.physics.add.sprite(100, 350, 'vader');
