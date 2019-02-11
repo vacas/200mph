@@ -17,10 +17,10 @@ function preload() {
 function create() {
     var lanesGroup = this.physics.add.staticGroup();
 
-    lanes[0] = lanesGroup.create(500, 564, 'blue');
-    lanes[1] = lanesGroup.create(500, 576, 'darkblue');
-    lanes[2] = lanesGroup.create(500, 588, 'blue');
-    lanes[3] = lanesGroup.create(500, 600, 'darkblue');
+    lanes[0] = lanesGroup.create(500, 557, 'blue');
+    lanes[1] = lanesGroup.create(500, 569, 'darkblue');
+    lanes[2] = lanesGroup.create(500, 581, 'blue');
+    lanes[3] = lanesGroup.create(500, 593, 'darkblue');
 
     this.physics.world.gravity.y = 200;
     player = this.physics.add.sprite(100, 350, 'vader');
@@ -74,7 +74,7 @@ const config = {
     physics: {
       default: 'arcade',
       arcade: {
-        debug: true,
+        // debug: true,
         gravity: { y: 60 }
       }
     },
