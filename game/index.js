@@ -15,7 +15,10 @@ function preload() {
 }
 
 function create() {
-    var lanesGroup = this.physics.add.staticGroup();
+    var map = this.make.tilemap({ key: 'map' });
+    console.log(this);
+    debugger;
+    var lanesGroup = map.add.staticGroup('media/lane.png', 'blue');
 
     lanes[0] = lanesGroup.create(500, 564, 'blue');
     lanes[1] = lanesGroup.create(500, 576, 'darkblue');
@@ -69,17 +72,19 @@ function move() {
 }
 
 const config = {
-    type: Phaser.AUTO,
+    type: Phaser.WEBGL,
+    width: 800,
+    height: 600,
     parent: 'phaser-example',
+    backgroundColor: '#fff',
+    pixelArt: true,
     physics: {
-      default: 'arcade',
+      default: 'impact',
       arcade: {
         debug: true,
         gravity: { y: 60 }
       }
     },
-    width: 800,
-    height: 600,
     scene: {
         preload: preload,
         create: create,
